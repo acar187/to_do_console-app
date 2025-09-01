@@ -1,0 +1,9 @@
+Benutzer;1;Benutzer
+Aufgabe;have fun;false
+Benutzer;2;Nikolaus
+Aufgabe;Geschenke packe;false
+Benutzer;3;Nick
+Aufgabe;fliegen;false
+Benutzer;4;Heidi
+Aufgabe;schlafen;true
+Aufgabe;Walk the dog;false
