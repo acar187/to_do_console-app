@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Benutzer {
@@ -23,8 +24,8 @@ public class Benutzer {
         return aufagbenListe;
     }
 
-    public void aufgabeHinzufügen(String beschreibung){
-        Aufgabe a = new Aufgabe(beschreibung);
+    public void aufgabeHinzufügen(String beschreibung, String prioritaet){
+        Aufgabe a = new Aufgabe(beschreibung, prioritaet);
         aufagbenListe.add(a);
         System.out.println("Aufgabe hinzugefügt: " + beschreibung);
     }
@@ -47,5 +48,16 @@ public class Benutzer {
 
     public Aufgabe aufgabeAnzeigen(int indexAufg){
         return aufagbenListe.get(indexAufg);
+    }
+
+    public void zeigeAufgabenInPrio(){
+        if (aufagbenListe.isEmpty()) {
+            System.out.println("Keine Aufagbe vorhanden.");            
+        }else{
+            aufagbenListe.stream()
+                         .sorted(Comparator.comparing(Aufgabe::isErledigt))
+                         .sorted(Comparator.comparingInt(Aufgabe::getPrioritaetsWert).reversed())
+                         .forEach(a -> System.out.println("  - " + a));
+        }
     }
 }

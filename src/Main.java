@@ -33,7 +33,9 @@ public class Main {
                     scanner.nextLine();
                     System.out.print("Aufgabenbeschreibung: ");
                     String beschreibung = scanner.nextLine();
-                    manager.aufgabeHinzufuegenFuerBenutzer(id, beschreibung);
+                    System.out.print("Prioritäet (\"hoch\", \"mittel\", \"niedrig\"):");
+                    String prioritaet = scanner.nextLine();
+                    manager.aufgabeHinzufuegenFuerBenutzer(id, beschreibung, prioritaet);
                 }
                 case 3 -> {
                     System.out.print("Benutzer-ID: ");
