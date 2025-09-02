@@ -18,10 +18,10 @@ public class AufgabenManager {
         System.out.println("Benutzer " + b.getName() + " hinzugefügt");
     }
 
-    public void aufgabeHinzufuegenFuerBenutzer(int benutzerId, String aufgabeBeschreibung){
+    public void aufgabeHinzufuegenFuerBenutzer(int benutzerId, String aufgabeBeschreibung, String prioritaet){
         Benutzer b = findeBenutzerNachId(benutzerId);
         if (b != null) {
-            b.aufgabeHinzufügen(aufgabeBeschreibung);            
+            b.aufgabeHinzufügen(aufgabeBeschreibung, prioritaet);            
         }
         else{
             System.out.println("Benutzer nicht gefunden.");
@@ -42,7 +42,8 @@ public class AufgabenManager {
     public void benutzerListeAnzeigen(){
         for (int i = 0; i < benutzerListe.size(); i++) {
             System.out.println(" - " + benutzerListe.get(i).getName() + ", ID: " + benutzerListe.get(i).getId());   
-            benutzerListe.get(i).aufagbenListeAnzeige();         
+            //benutzerListe.get(i).aufagbenListeAnzeige();  
+            benutzerListe.get(i).zeigeAufgabenInPrio();       
         }
     }
 
@@ -60,7 +61,7 @@ public class AufgabenManager {
             for (Benutzer benutzer : benutzerListe) {
                 pw.println("Benutzer;" + benutzer.getId() + ";" + benutzer.getName());
                 for (Aufgabe a : benutzer.getAufagbenListe()) {
-                    pw.println("Aufgabe;" + a.getBeschreibung() + ";" + a.isErledigt());
+                    pw.println("Aufgabe;" + a.getBeschreibung() + ";" + a.getPrioritaet() + ";" + a.isErledigt());
                 }
             }
             System.out.println("Gespeichert in " + dateiname);
@@ -90,8 +91,9 @@ public class AufgabenManager {
                 }else{
                     if (teile[0].equals("Aufgabe") && aktuellerBenutzer !=null) {
                         String beschreibung = teile[1];
-                        boolean isErledigt = Boolean.valueOf(teile[2]);
-                        Aufgabe a = new Aufgabe(beschreibung);
+                        String prioritaet = teile[2];
+                        boolean isErledigt = Boolean.valueOf(teile[3]);
+                        Aufgabe a = new Aufgabe(beschreibung, prioritaet);
                         a.setErledigt(isErledigt);
                         aktuellerBenutzer.getAufagbenListe().add(a);
                     }
